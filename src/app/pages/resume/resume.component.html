@@ -1,0 +1,85 @@
+<div class="resume-root" [class.dark-mode]="isDarkMode">
+    <div class="resume-actions">
+        <button (click)="toggleDarkMode()">
+            <i class="bi" [ngClass]="isDarkMode ? 'bi-brightness-high' : 'bi-moon'"></i>
+            {{ isDarkMode ? 'Light Mode' : 'Dark Mode' }}
+        </button>
+
+        <button (click)="downloadPDF()">
+            <i class="bi bi-file-earmark-pdf"></i> Download PDF
+        </button>
+    </div>
+
+    <div class="resume-container">
+        <h1 style="text-align: center;">{{ resume.name }}</h1>
+
+        <div class="contact-info">
+            <p>{{ resume.location }} &nbsp;|&nbsp; <i class="bi bi-envelope"></i> {{ resume.email }} &nbsp;|&nbsp; <i
+                    class="bi bi-telephone"></i> {{ resume.phone }} &nbsp;|&nbsp; <i class="bi bi-linkedin"></i>
+                <a href="https://{{ resume.linkedin }}" target="_blank">{{ resume.linkedin }}</a>
+            </p>
+            <p style="text-align: center;"><i class="bi bi-github"></i>
+                <a href="https://{{ resume.github }}" target="_blank">{{ resume.github }}</a>
+            </p>
+        </div>
+
+        <section>
+            <h2><i class="bi bi-person-circle"></i> Summary</h2>
+            <p>{{ resume.summary }}</p>
+        </section>
+
+        <section>
+            <h2><i class="bi bi-tools"></i> Skills</h2>
+            <div class="skills">
+                <p><b>Programming:</b> {{ resume.skills.programming.join(', ') }}</p>
+                <p><b>Frameworks:</b> {{ resume.skills.frameworks.join(', ') }}</p>
+                <p><b>DevOps:</b> {{ resume.skills.devops.join(', ') }}</p>
+                <p><b>SQL:</b> {{ resume.skills.sql.join(', ') }}</p>
+                <p><b>VCS:</b> {{ resume.skills.vcs.join(', ') }}</p>
+                <p><b>Tools:</b> {{ resume.skills.tools.join(', ') }}</p>
+                <p><b>Languages:</b> {{ resume.skills.languages.join(', ') }}</p>
+            </div>
+        </section>
+
+        <section>
+            <h2><i class="bi bi-briefcase"></i> Experience</h2>
+            <div *ngFor="let exp of resume.experience" class="job">
+                <h3>{{ exp.role }} - {{ exp.company }} ({{ exp.location }})</h3>
+                <p><i>{{ exp.period }}</i></p>
+                <ul>
+                    <li *ngFor="let detail of exp.details">{{ detail }}</li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <h2><i class="bi bi-mortarboard"></i> Education</h2>
+            <div *ngFor="let edu of resume.education">
+                <p>{{ edu.degree }}, {{ edu.school }} ({{ edu.year }})</p>
+            </div>
+        </section>
+
+        <section>
+            <h2><i class="bi bi-award"></i> Certificates</h2>
+            <ul>
+                <li *ngFor="let cert of resume.certificates">{{ cert.name }} ({{ cert.period }})</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2><i class="bi bi-folder"></i> Projects</h2>
+            <div *ngFor="let proj of resume.projects" class="project">
+                <h3>{{ proj.name }}</h3>
+                <p>{{ proj.description.join(' ') }}</p>
+                <p><b>Tech:</b> {{ proj.tech }}</p>
+                <p>
+                    Links:
+                    <span *ngFor="let link of proj.links; let i = index">
+                        <a href="https://{{ link }}" target="_blank">{{ link }}</a><span
+                            *ngIf="i < proj.links.length - 1">, </span>
+                    </span>
+                </p>
+            </div>
+        </section>
+    </div>
+</div>
