@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Resume } from './resume.model';
+import { Title } from '@angular/platform-browser';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 
@@ -12,6 +13,12 @@ import html2canvas from 'html2canvas';
   styleUrls: ['./resume.component.css']
 })
 export class ResumeComponent {
+
+  constructor(private titleService: Title) {}
+
+  ngOnInit() {
+    this.titleService.setTitle('Resume CV | Yevhen Tereshchenko');
+  }
 
   isDarkMode = false;
 
